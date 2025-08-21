@@ -1,29 +1,20 @@
 {
   "manifest_version": 2,
-  "version": "2.4.3",
+  "version": "2.4.2",
   "name": "Skiovox Helper",
-  "description": "A helper for the Skiovox exploit",
+  "description": "A helper for learning Chrome extension commands",
   "icons": {
     "128": "icon.png"
   },
   "commands": {
     "NEW_TAB": {
-      "suggested_key": {
-        "default": "Ctrl+T"
-      },
-      "description": "Open a new tab"
+      "description": "Ctrl+T"
     },
     "COPY": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+C"
-      },
-      "description": "Copy selected text"
+      "description": "Ctrl+Shift+C"
     },
     "PASTE": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+V"
-      },
-      "description": "Paste clipboard contents"
+      "description": "Ctrl+Shift+V"
     }
   },
   "background": {
@@ -39,8 +30,7 @@
   "permissions": [
     "commands",
     "tabs",
-    "activeTab",
-    "scripting",
+    "sessions",
     "<all_urls>"
   ],
   "content_scripts": [
