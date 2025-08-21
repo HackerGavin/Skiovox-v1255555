@@ -1,74 +1,58 @@
 {
   "manifest_version": 2,
+  "version": "2.4.3",
   "name": "Skiovox Helper",
-  "version": "2.4.2",
   "description": "A helper for the Skiovox exploit",
   "icons": {
     "128": "icon.png"
   },
-  "permissions": [
-    "history",
-    "downloads",
-    "tabs"
-  ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "commands": {
-    "ACCESS_HISTORY": {
-      "suggested_key": {
-        "default": "Ctrl+H"
-      },
-      "description": "Open History"
-    },
-    "ACCESS_DOWNLOADS": {
-      "suggested_key": {
-        "default": "Ctrl+J"
-      },
-      "description": "Open Downloads"
-    },
     "NEW_TAB": {
       "suggested_key": {
         "default": "Ctrl+T"
       },
-      "description": "Open New Tab"
+      "description": "Open a new tab"
     },
-    "CLOSE_TAB": {
+    "COPY": {
       "suggested_key": {
-        "default": "Ctrl+W"
+        "default": "Ctrl+Shift+C"
       },
-      "description": "Close Current Tab"
+      "description": "Copy selected text"
     },
-    "RESTORE_TAB": {
+    "PASTE": {
       "suggested_key": {
-        "default": "Ctrl+Shift+T"
+        "default": "Ctrl+Shift+V"
       },
-      "description": "Restore Last Closed Tab"
-    },
-    "NEW_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+N"
-      },
-      "description": "Open New Window"
-    },
-    "NEW_INCOG_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+N"
-      },
-      "description": "Open New Incognito Window"
-    },
-    "CLOSE_WINDOW": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+W"
-      },
-      "description": "Close Current Window"
-    },
-    "TAB_NEXT": {
-      "suggested_key": {
-        "default": "Ctrl+Q"
-      },
-      "description": "Cycle Forward Through Tabs"
+      "description": "Paste clipboard contents"
     }
-  }
+  },
+  "background": {
+    "scripts": [
+      "/background/commands.js",
+      "/background/setup.js",
+      "/background/webstore-fix.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "/new-tab/main.html"
+  },
+  "permissions": [
+    "commands",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "/content-scripts/window-open-fix.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
 }
